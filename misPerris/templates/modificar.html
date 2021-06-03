@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+<script src="{% static 'js/sweetalert2.all.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+{% endblock css %}
+
+{% block contenido %}
+<section id="bienvenida">
+    <h2>Sistema de Administracion de mascotas</h2>
+    <h3>Usuario: <b>{{user.username}}</b> </h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, minima optio accusamus nihil
+        obcaecati recusandae aliquid consequuntur cumque voluptate. Architecto commodi molestiae recusandae
+        nihil ad assumenda fugit, quibusdam aut consectetur.</p>
+</section>
+
+<section id="formulario">
+
+    <form class="form-registro" action="{% url 'MODI' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 class="form-titulo">Modificar Mascota</h2>
+        <div class="contenedor-input">
+
+            <input class="col-p" value="{{mascota.nombre}}" type="text" name="txtNombre" id="txtNombre" placeholder="ingrese nombre" minlength="3"
+                maxlength="25"  required pattern="[A-Za-z ]{3,25}" title="solamente caracteres de entre 3 y 25 letras">
+            <input class="col-p" value="{{mascota.edad}}" type="number" name="txtEdad" id="txtEdad" required placeholder="ingrese edad">
+            
+            Imagen Actual:<a href="{{mascota.imagen.url}}">{{mascota.imagen.url}}</a>
+            <input class="col-g" type="file" name="txtImg" id="txtImg">
+            
+            <textarea name="txtDesc" class="col-g" id="txtDesc" cols="80" rows="10">{{mascota.descripcion}}</textarea>
+            <select class="col-g" style="padding: 15px;margin-top: 15px;" name="cboCategoria" id="cboCategoria">
+                {% for item in categorias %}
+                    {% if item.nombre == mascota.categoria.nombre %}
+                        <option selected>{{item.nombre}}</option>
+                    {% else %}
+                        <option>{{item.nombre}}</option>
+                    {% endif %}      
+                {% endfor %}
+            </select>
+
+            <input class="btn-registrar" type="submit" value="Modificar">
+            <input class="btn-registrar" type="button" value="Cancelar">
+        </div>
+        <h1>{{mensaje}}</h1>
+    </form>
+</section>
+
+{% endblock contenido %}
+{% block js %}
+
+{% endblock js %}

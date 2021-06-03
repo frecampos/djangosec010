@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Perris</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="stylesheet" href="css/formulario.css">
+    <script src="lib/jquery.js"></script>
+    <script src="dist_jqv/jquery.validate.min.js"></script>
+ 
+</head>
+
+<body>
+    <header>
+        <div class="contenedor">
+            <h1 class="icon-guidedog">Mis Perris</h1>
+
+            <input type="checkbox" name="" id="menu-bar">
+            <label class="icon-credit-card" for="menu-bar"></label>
+
+            <nav class="menu">
+                <a href="index.html">Inicio</a>
+                <a href="galeria.html">Galeria</a>
+                <a href="">Formulario</a>
+                <a href="">Quienes Somos</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="banner">
+            <img src="img/perro2.jpg" alt="">
+            <div class="contenedor">
+                <h2>Mascotas felices en mis perris</h2>
+                <p>Cual es la mejor mascota para usted</p>
+                <a href="">Leer Mas</a>
+            </div>
+        </section>
+
+        <section id="bienvenida">
+            <h2>Formulario de inscripcion para adoptar un animalito</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, minima optio accusamus nihil
+                obcaecati recusandae aliquid consequuntur cumque voluptate. Architecto commodi molestiae recusandae
+                nihil ad assumenda fugit, quibusdam aut consectetur.</p>
+        </section>
+
+        <script>
+            $().ready(function() {
+                
+                $("#formu").validate({
+                    rules: {
+                        txtNombreCompleto:{
+                            required: true,
+                            minlength: 5,
+                            maxlength: 45
+                        }
+                    },
+                    messages:{
+                        txtNombreCompleto:{
+                            required: "es requerido",
+                            minlength: "el minimo largo es de 5 caracteres",
+                            maxlength: "maximo largo de 45 caracteres"
+                        },
+                        txtUsuario:{
+                            required: "ingrese usuario"
+                        }
+                    }
+                });
+
+            });
+        </script>
+        <section id="formulario">
+
+            <form class="form-registro" action="" method="post" id="formu" >
+
+                <h2 class="form-titulo">Creacion de cuenta usuario</h2>
+                <div class="contenedor-input">
+                    <input class="col-sm" type="text" name="txtRut" id="txtRut" placeholder="ingrese rut" required>
+                    <input class="col-sm" type="text" name="txtNombreCompleto" id="txtNombreCompleto" placeholder="ingrese nombre y apellido"  pattern="[A-Za-z ]{3,45}" title="solamente caracteres de entre 3 y 45 letras">
+                    <input class="col-sm" type="date" name="txtFechaNaci" id="txtFechaNaci" required >
+                    <input class="col-sm" type="email" name="txtEmail" id="txtEmail" placeholder="ingrese email" required >
+                    <input class="col-sm" type="text" name="txtUsuario" id="" placeholder="ingrese usuario" required>
+                    <input class="col-sm" type="password" name="txtPass" id="" placeholder="ingrese password" required>
+                    <input class="col-xl" type="text" name="txtFono" id="" placeholder="ingrese telefono" required pattern="[0-9]{9}" title="ingrese un telefono ej. 232554579">
+
+                    <input class="btn-registrar" type="submit" value="Registrar">
+                   
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="contenedor">
+            <p>Mis Perris - Desarrollo Web</p>
+        </div>
+    </footer>
+   
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+<script src="{% static 'js/sweetalert2.all.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+{% endblock css %}
+
+{% block contenido %}
+<section id="bienvenida">
+    <h2>Tus mascotas adoptadas</h2>
+    <h3>Usuario: <b>{{user.username}}</b> </h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, minima optio accusamus nihil
+        obcaecati recusandae aliquid consequuntur cumque voluptate. Architecto commodi molestiae recusandae
+        nihil ad assumenda fugit, quibusdam aut consectetur.</p>
+</section>
+
+
+<div style="text-align: center;"><h1>{{mensaje}}</h1></div>
+<div style="text-align: center; font-size: xx-large;">Mis Mascotas</div>
+<div>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Descripcion</th>
+                <th>Imagen</th>
+                <th>Tipo</th>
+                <th>Operaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in mascotas %}
+            <tr>
+                <td>{{item.nombre}}</td>
+                <td>{{item.edad}}</td>
+                <td>{{item.descripcion}}</td>
+                <td>
+                    <img src="{{item.imagen.url}}" alt="" width="100px" height="100px">
+                </td>
+                <td>{{item.categoria.nombre}}</td>
+                <td>
+                    <button class="btn btn-danger" onclick="devolver('{{item.nombre}}')">devolver</button>                 
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+{% endblock contenido %}
+{% block js %}
+<script>
+
+    function devolver(nombre) {
+        Swal.fire({
+            title: 'desea devolver la mascota '+nombre +' ?',            
+            showCancelButton: true,
+            confirmButtonText: `Devolver`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href='/devolver/'+nombre+'/'; 
+            } 
+        })
+       
+
+    }
+</script>
+{% endblock js %}

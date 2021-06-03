@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'dist/css/lightbox.css' %}">
+{% endblock css %}
+
+{% block contenido %}
+<section id="bienvenida">
+    <h2>Galeria de mascotas en adopcion</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, minima optio accusamus nihil
+        obcaecati recusandae aliquid consequuntur cumque voluptate. Architecto commodi molestiae recusandae
+        nihil ad assumenda fugit, quibusdam aut consectetur.</p>
+
+    <form action="{% url 'FILTROC' %}" method="post">
+        {% csrf_token %}
+        Filtro por Categoria:
+        <select name="cboCategoria" id="cboCategoria">
+            {% for reg in categorias %}
+            <option>{{reg.nombre}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Filtrar">
+    </form>
+
+    <form action="{% url 'BUSCARN' %}" method="post">
+        {% csrf_token %}
+        Busqueda por nombre mascota:
+        <input type="text" name="txtNombre" id="txtNombre">
+        <input type="submit" value="Buscar">
+    </form>
+
+    <form action="{% url 'FILTROD' %}" method="post">
+        {% csrf_token %}
+        Filtrar por descripcion:
+        <input type="text" name="txtDesc" id="txtDesc">
+        <input type="submit" value="Filtrar">
+    </form>
+</section>
+
+<section id="blog">
+    <h3>lo ultimo de nuestro blog</h3>
+    <div class="contenedor">
+        {% for reg in mascotas %}
+        <article>
+            <a href="{{reg.imagen.url}}" data-lightbox="perros" data-title="{{reg.descripcion}}">
+                <img src="{{reg.imagen.url}}" alt="">
+            </a>
+            <h4>{{reg.nombre}}</h4>
+            <h5>
+                <a href="{% url 'FICHA' reg.nombre %}"> Ver Ficha</a>
+            </h5>
+        </article>
+        {% endfor %}
+    </div>
+    <div style="text-align: center;color: red;font-size: xx-large;">
+        {{cantidad}}
+    </div>
+</section>
+{% endblock contenido %}
+
+{% block js %}
+<script src="{% static 'dist/js/lightbox-plus-jquery.js' %}"></script>
+{% endblock js %}

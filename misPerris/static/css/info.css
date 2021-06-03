@@ -1,0 +1,26 @@
+
+#info{
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-family: cursive;
+}
+
+
+#info .contenedor{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.info-pet img{
+    width: 180px;
+    height: 180px;
+    border: solid 7px white;
+    border-radius: 50%;
+}
+
+.info-pet{
+    margin: 20px;
+}

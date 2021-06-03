@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+{% endblock css %}
+{% block contenido %}
+
+
+<section id="bienvenida">
+    <h2>Ficha de informacion de nuestras mascotas</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, minima optio accusamus nihil
+        obcaecati recusandae aliquid consequuntur cumque voluptate. Architecto commodi molestiae recusandae
+        nihil ad assumenda fugit, quibusdam aut consectetur.</p>
+    <p>Los animalitos que tenemos son del tipo {{tipo.0}}</p>
+
+
+</section>
+
+<section id="blog">
+    <h3>Ficha de Mascota</h3>
+    <div class="contenedor">
+        <article>
+            {% for reg in mascota %}
+            <img src="{{reg.imagen}}" alt="">
+
+            <h4>Nombre:{{reg.nombre}}</h4>
+            <h4>Edad:{{reg.edad}}</h4>
+            <h4>Descripcion:{{reg.descripcion}}</h4>
+            <h4>Categoria:{{reg.categoria}}</h4>
+            <!--<h4>Tiempo de Vida:{{mascota.categoria.anno}}</h4>-->
+
+            
+        </article>
+
+        <!-- galeria de imagenes -->
+        <div style="width: 250px;margin-top: 15px;">
+
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{reg.imagen}}" class="d-block w-100" width="250px" height="250px"
+                            alt="...">
+                    </div>
+                    {% for reg in galeria %}
+                    <div class="carousel-item">
+                        <img src="{{reg.imagen.url}}" class="d-block w-100" width="250px" height="250px" alt="...">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    {% if user.is_authenticated %}
+    <div>
+        <p> Usuario {{user.first_name}} me quiere adoptar </p>
+        <button onclick="javascript:location.href='/adoptar/{{mascota.nombre}}/'">Adoptame</button>
+    </div>
+    {% endif %}
+    <div style="text-align: center;color: red;font-size: xx-large;">
+        {{mensaje}}
+    </div>
+
+
+
+</section>
+
+{% endblock contenido %}
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+{% endblock js %}

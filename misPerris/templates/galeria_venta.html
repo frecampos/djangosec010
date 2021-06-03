@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Perris</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="stylesheet" href="dist/css/lightbox.css">
+    <script src="js/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="contenedor">
+            <h1 class="icon-guidedog">Mis Perris</h1>
+
+            <input type="checkbox" name="" id="menu-bar">
+            <label class="icon-credit-card" for="menu-bar"></label>
+
+            <nav class="menu">
+                <a href="index.html">Inicio</a>
+                <a href="galeria.html">Galeria</a>
+                <a href="formulario.html">Formulario</a>
+                <a href="">Quienes Somos</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="banner">
+            <img src="img/perro2.jpg" alt="">
+            <div class="contenedor">
+                <h2>Mascotas felices en mis perris</h2>
+                <p>Cual es la mejor mascota para usted</p>
+                <a href="">Leer Mas</a>
+            </div>
+        </section>
+
+        <section id="bienvenida">
+            <h2>Galeria de mascotas para la venta</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, minima optio accusamus nihil
+                obcaecati recusandae aliquid consequuntur cumque voluptate. Architecto commodi molestiae recusandae
+                nihil ad assumenda fugit, quibusdam aut consectetur.</p>
+        </section>
+
+        <section id="blog">
+            <h3>lo ultimo de nuestro stock</h3>
+
+            <input type="button" value="Recuperar Euro" id="btnEuro">
+            <script>
+                $(document).ready(function() {
+                   $("#btnEuro").click(function() {
+                       $.get("https://mindicador.cl/api/euro",function(data) {
+                           var euro= data.serie[0].valor;
+                            $("#valor_euro").html(euro);
+                       });
+                   });
+                });
+            </script>
+            <div id="valor_euro"></div>
+
+            
+            <!-- servicio que permite en javasript recuperacion de un contenido en formato JSON -->
+            <input type="button" value="Recuperar Valor Dolar" onclick="recuperarDolar()">
+            <div id="dolar"></div>
+            <script>
+                function recuperarDolar() {
+                    fetch("https://mindicador.cl/api/dolar")
+                    .then(
+                        function (response) {
+                            if (response.status!=200) {
+                                console.log("se encontro con un error ");
+                                return;
+                            }
+                            // recuperar el dato que se encuentra en la respuesta "response"
+                            response.json().then(
+                                function (data) {
+                                    console.log(data);
+                                    var largo= data.serie.length;
+                                    console.log('Cantidad:'+largo);
+                                    console.log('Valor Dolar:'+data.serie[0].valor);
+                                    document.getElementById('dolar').innerHTML=data.serie[0].valor;
+                                }
+                            )
+                        }
+                    );
+                }
+            </script>
+            <div class="contenedor">
+                
+                <article>
+                    <a href="img/perro1.jpg" data-lightbox="perros">
+                        <img src="img/perro1.jpg" alt="">
+                    </a>
+                    <h4>Perruno</h4>
+                    <h5>Valor: US$ 5</h5>
+                </article>
+                <article>
+                    <a href="img/perro3.jpg" data-lightbox="perros">
+                        <img src="img/perro3.jpg" alt="">
+                    </a>
+                    <h4>Simpatia</h4>
+                    <h5>Valor: US$ 2</h5>
+                </article>
+                <article>
+                    <a href="img/perro4.jpg" data-lightbox="perros">
+                        <img src="img/perro4.jpg" alt="">
+                    </a>
+                    <h4>KK C</h4>
+                    <h5>Valor: US$ 15</h5>
+                </article>
+                <article>
+                    <a href="img/perro2.jpg" data-lightbox="perros">
+                        <img src="img/perro2.jpg" alt="">
+                    </a>
+                    <h4>Chuleta</h4>
+                    <h5>Valor: US$ 25</h5>
+                </article>
+                <article>
+                    <a href="img/perro5.png" data-lightbox="perros">
+                        <img src="img/perro5.png" alt="">
+                    </a>
+                    <h4>Lulo</h4>
+                    <h5>Valor: US$ 9</h5>
+                </article>
+                <article>
+                    <a href="img/perro6.jpg" data-lightbox="perros">
+                        <img src="img/perro6.jpg" alt="">
+                    </a>
+                    <h4>Depo Depo</h4>
+                    <h5>Valor: US$ 10</h5>
+                </article>
+                <article>
+                    <a href="img/perro7.jpg" data-lightbox="perros">
+                        <img src="img/perro7.jpg" alt="">
+                    </a>
+                    <h4>Oscarito</h4>
+                    <h5>Valor: US$ 1</h5>
+                </article>
+                <article>
+                    <a href="img/perro8.jpg" data-lightbox="perros">
+                        <img src="img/perro8.jpg" alt="">
+                    </a>
+                    <h4>La linda</h4>
+                    <h5>Valor: US$ 4</h5>
+                </article>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer>
+        <div class="contenedor">
+            <p>Mis Perris - Desarrollo Web</p>
+        </div>
+    </footer>
+    <script src="dist/js/lightbox-plus-jquery.js"></script>
+</body>
+
+</html>
